@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python gen_tours.py)",
+      "Bash(python3 gen_tours.py)",
+      "Bash(where python *)",
+      "Bash(where python3 *)",
+      "Bash(py --version)",
+      "Bash(py gen_tours.py)"
+    ]
+  }
+}

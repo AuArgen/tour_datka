@@ -6,8 +6,8 @@ Static multi-page website for **Datka Travel**, a Kyrgyzstan tour company founde
 
 | Version | Entry point | Design system |
 |---------|-------------|---------------|
-| **Original** | `index.html` | `style.css` + `tour-components/style.css` |
-| **Luxury (active)** | `index_second.html` | `assets/css/luxury.css` + `assets/js/luxury.js` |
+| **Original** | `index_last.html` | `style.css` + `tour-components/style.css` |
+| **Luxury (active)** | `index.html` | `assets/css/luxury.css` + `assets/js/luxury.js` |
 
 The luxury version is the primary site. All 21 individual tour pages live in `tours_pages/`.
 
@@ -20,10 +20,10 @@ Served via VS Code Live Server (port 5500) or `npx serve . --listen 5500`.
 ```
 DatkaTravel-main/
 │
-├── index.html                        # Original landing page (legacy)
-├── index_second.html                 # Luxury main page (active)
-├── style.css                         # Styles for original index.html only
-├── env.js                            # BASE_URL config for original index.html
+├── index_last.html                        # Original landing page (legacy)
+├── index.html                 # Luxury main page (active)
+├── style.css                         # Styles for original index_last.html only
+├── env.js                            # BASE_URL config for original index_last.html
 ├── gen_tours.py                      # Python generator — created tours 5–21
 │
 ├── assets/
@@ -97,7 +97,7 @@ The site uses a **light/white theme** with a dark full-screen hero and dark foot
 
 ### Hero — Fullscreen Photo Slideshow
 
-The `index_second.html` hero is a fullscreen auto-playing photo slideshow:
+The `index.html` hero is a fullscreen auto-playing photo slideshow:
 
 | Element | Description |
 |---------|-------------|
@@ -111,7 +111,7 @@ The `index_second.html` hero is a fullscreen auto-playing photo slideshow:
 | `.hero-orb-1/2` | Floating blurred radial orbs for depth |
 | `.hero-scroll` | Animated scroll indicator at bottom center |
 
-**Slide images** (paths relative to `index_second.html` at root):
+**Slide images** (paths relative to `index.html` at root):
 1. `img/imgonline-com-ua-Com.jpg`
 2. `img/0x0.jpg`
 3. `tour-components/img/jpg/1.jpg`
@@ -159,7 +159,7 @@ Tour card images use CSS custom properties: `style="--img:url('...')"`.
 
 | Location of HTML file | Correct `url()` path |
 |----------------------|---------------------|
-| `index_second.html` (root) | `url('../../img/png/N.png')` |
+| `index.html` (root) | `url('../../img/png/N.png')` |
 | `tours_pages/tour-N.html` | `url('../../img/png/N.png')` |
 
 Regular `<img src>` attributes are resolved relative to the HTML file and use `../img/png/N.png` for tour pages — this is correct and should NOT be changed.
@@ -182,7 +182,7 @@ Regular `<img src>` attributes are resolved relative to the HTML file and use `.
 
 ---
 
-## `index_second.html` — Sections
+## `index.html` — Sections
 
 | Anchor | Section | Notes |
 |--------|---------|-------|
@@ -201,7 +201,7 @@ Regular `<img src>` attributes are resolved relative to the HTML file and use `.
 ## Individual Tour Pages (`tours_pages/`)
 
 ### Shared Page Structure
-1. `.lux-nav` → links to `../index_second.html`
+1. `.lux-nav` → links to `../index.html`
 2. `.tour-hero` — dark gradient bg (inline `<style>`) + floating PNG icon (`<img src="../img/png/N.png">`)
 3. `.tour-stats` — 5-col stat bar (duration, difficulty, group, language, price)
 4. `.tour-about` — 2-col: paragraphs + highlights card
@@ -296,6 +296,6 @@ Python script at the project root. Generated `tours_pages/tour-5.html` through `
 | 1 | `tour-components/script/script.js` | Commented out in HTML — parallax disabled |
 | 2 | `script.js` (original) | `smoothScroll` defined twice; `querySelector('your-button-selector')` throws |
 | 3 | `tour-components/style.css` | `body { height: 700vh }` forces excessive page height |
-| 4 | `index.html` | About Us images from external tildacdn.pro CDN |
+| 4 | `index_last.html` | About Us images from external tildacdn.pro CDN |
 | 5 | All forms | No backend handler — submit does nothing |
 | 6 | `initHeroParallax()` | Targets `.hero-bg` which no longer exists in slideshow hero — no-op |

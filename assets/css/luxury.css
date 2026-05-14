@@ -871,10 +871,15 @@ img { max-width: 100%; display: block; }
   top: 16px;
   right: 16px;
   font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 500;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gold-bright);
+  background: rgba(0,0,0,0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(184,148,62,0.35);
+  border-radius: var(--r-full);
+  padding: 4px 12px;
 }
 
 .tour-card-body { padding: 24px; }
@@ -907,11 +912,12 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
-  color: var(--text-3);
-  letter-spacing: 0.05em;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: 0.03em;
 }
-.tour-card-meta-item svg { width: 14px; height: 14px; color: var(--gold-dim); flex-shrink: 0; }
+.tour-card-meta-item svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
 .tour-card-link {
   display: flex;
   align-items: center;
@@ -1608,7 +1614,27 @@ img { max-width: 100%; display: block; }
   .tour-about { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .stat-item:nth-child(2) { border-right: none; }
-  .hero-features { display: none; }
+  /* hero-features: show as horizontal scroll strip at bottom of hero */
+  .hero-inner { position: static; }
+  .hero-features {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 90px;
+    left: 0;
+    right: 0;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 0 24px;
+    min-width: unset;
+    z-index: 4;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .hero-features::-webkit-scrollbar { display: none; }
+  .hero-features-head { display: none; }
+  .hero-feature { flex-shrink: 0; min-width: 190px; }
 }
 
 @media (max-width: 768px) {
@@ -1617,7 +1643,7 @@ img { max-width: 100%; display: block; }
   .burger { display: flex; }
   .hero-inner { padding: 0 20px; }
   .hero-title { font-size: clamp(38px, 10vw, 72px); }
-  .hero-features { display: none; }
+  .hero-feature { min-width: 170px; }
   .tours-grid, .related-grid { grid-template-columns: 1fr; }
   .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
   .about-features { grid-template-columns: 1fr; }

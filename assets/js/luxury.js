@@ -99,17 +99,17 @@ function initCardTilt() {
 
 // ── Tour filter ─────────────────────────────────────────────
 function initFilter() {
-  const btns  = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.tour-card[data-cat]');
+  const btns     = document.querySelectorAll('.filter-btn');
+  const wrappers = document.querySelectorAll('#toursGrid > [data-cat]');
   if (!btns.length) return;
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const cat = btn.dataset.filter;
-      cards.forEach(c => {
-        const show = cat === 'all' || c.dataset.cat === cat;
-        c.parentElement.style.display = show ? '' : 'none';
+      wrappers.forEach(w => {
+        const show = cat === 'all' || w.dataset.cat === cat;
+        w.style.display = show ? '' : 'none';
       });
     });
   });

@@ -8,6 +8,38 @@
   </head>
 
   <body>
+    <!-- ══════════════════════ COUNTRY ENTRY ══════════════════════ -->
+    <div class="ce-overlay" id="ceOverlay">
+      <div class="ce-panel ce-panel--kg" id="cePanelKG">
+        <div class="ce-bg" style="background-image:url('img/imgonline-com-ua-Com.jpg')"></div>
+        <div class="ce-veil ce-veil--kg"></div>
+        <div class="ce-inner">
+          <span class="ce-flag">🇰🇬</span>
+          <h2 class="ce-name">Kyrgyzstan</h2>
+          <p class="ce-tagline">Tian Shan · Nomad Life · Silk Road</p>
+          <div class="ce-meta"><span>21 Tours</span><span>·</span><span>From $35</span></div>
+          <div class="ce-cta">Explore Tours <span>›</span></div>
+        </div>
+      </div>
+      <div class="ce-divider">
+        <div class="ce-divider-line"></div>
+        <div class="ce-divider-badge">OR</div>
+        <div class="ce-divider-line"></div>
+      </div>
+      <div class="ce-panel ce-panel--kz" id="cePanelKZ">
+        <div class="ce-bg" style="background-image:url('img/0x0.jpg')"></div>
+        <div class="ce-veil ce-veil--kz"></div>
+        <div class="ce-inner">
+          <span class="ce-flag">🇰🇿</span>
+          <h2 class="ce-name">Kazakhstan</h2>
+          <p class="ce-tagline">Great Steppe · Almaty · Charyn</p>
+          <div class="ce-meta"><span>New Tours</span><span>·</span><span>Coming 2025</span></div>
+          <div class="ce-cta">Explore Tours <span>›</span></div>
+        </div>
+      </div>
+      <button class="ce-skip" id="ceSkip">Skip</button>
+    </div>
+
     <!-- ══════════════════════ NAV ══════════════════════ -->
     <nav class="lux-nav">
       <div class="container">
@@ -19,6 +51,10 @@
             <li><a href="#why">Why Us</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <button class="nav-country-btn" id="navCountryBtn">
+            <span id="navCountryFlag">🌍</span>
+            <span id="navCountryLabel">Choose Country</span>
+          </button>
           <a
             href="#contact"
             class="btn btn-gold nav-cta"
@@ -40,6 +76,19 @@
       <a href="#contact" class="btn btn-gold" style="margin-top: 16px"
         >Book Now</a
       >
+    </div>
+
+    <!-- ══════════════════════ KZ BANNER ══════════════════════ -->
+    <div class="kz-banner" id="kzBanner">
+      <div class="container">
+        <div class="kz-banner-inner">
+          <div class="kz-banner-text">
+            <span>🇰🇿</span>
+            <span>You are viewing <strong>Kazakhstan</strong> tours — new destinations launching soon!</span>
+          </div>
+          <button class="kz-banner-switch" id="kzBannerSwitch">Switch to 🇰🇬 Kyrgyzstan</button>
+        </div>
+      </div>
     </div>
 
     <!-- ══════════════════════ HERO ══════════════════════ -->
@@ -321,7 +370,7 @@
           </p>
         </div>
 
-        <div class="filter-bar reveal">
+        <div class="filter-bar reveal" id="filterBar">
           <button class="filter-btn active" data-filter="all">All Tours</button>
           <button class="filter-btn" data-filter="city">City & Culture</button>
           <button class="filter-btn" data-filter="nature">
@@ -330,6 +379,31 @@
           <button class="filter-btn" data-filter="history">History</button>
           <button class="filter-btn" data-filter="adventure">Adventure</button>
           <button class="filter-btn" data-filter="lake">Lakes</button>
+        </div>
+
+        <!-- Kazakhstan placeholder (shown when KZ is selected) -->
+        <div class="kz-ph" id="kzToursSection">
+          <div class="kz-ph-card">
+            <div class="kz-ph-icon">🇰🇿</div>
+            <h3 class="kz-ph-title">Kazakhstan Tours — Coming Soon</h3>
+            <p class="kz-ph-desc">
+              We are developing extraordinary tours across Kazakhstan — from the
+              dramatic Charyn Canyon to cosmopolitan Almaty and the vast Great
+              Steppe. Be the first to experience it.
+            </p>
+            <div class="kz-ph-actions">
+              <a href="#contact" class="btn btn-gold">Inquire Now</a>
+              <a href="#contact" class="btn btn-outline-gold">Get Notified</a>
+            </div>
+            <div class="kz-ph-dests">
+              <div class="kz-ph-dest">🏔️ <span>Charyn Canyon</span></div>
+              <div class="kz-ph-dest">🌆 <span>Almaty</span></div>
+              <div class="kz-ph-dest">🐎 <span>Great Steppe</span></div>
+              <div class="kz-ph-dest">🏛️ <span>Astana</span></div>
+              <div class="kz-ph-dest">🌊 <span>Balkhash Lake</span></div>
+              <div class="kz-ph-dest">🏕️ <span>Altai Mountains</span></div>
+            </div>
+          </div>
         </div>
 
         <div class="tours-grid" id="toursGrid">

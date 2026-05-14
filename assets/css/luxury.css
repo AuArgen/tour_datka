@@ -1661,6 +1661,324 @@ img { max-width: 100%; display: block; }
   .tour-hero-overlay { background: linear-gradient(to bottom, rgba(4,4,12,0.40) 0%, rgba(4,4,12,0.65) 55%, rgba(4,4,12,0.97) 100%); }
 }
 
+/* ============================================================
+   COUNTRY ENTRY OVERLAY
+   ============================================================ */
+.ce-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  overflow: hidden;
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.ce-overlay.leaving {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+.ce-overlay.gone { display: none !important; }
+
+.ce-panel {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ce-overlay.hov-kg .ce-panel--kg { flex: 1.65; }
+.ce-overlay.hov-kg .ce-panel--kz { flex: 0.35; }
+.ce-overlay.hov-kz .ce-panel--kg { flex: 0.35; }
+.ce-overlay.hov-kz .ce-panel--kz { flex: 1.65; }
+
+.ce-bg {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.7s var(--ease);
+}
+.ce-panel:hover .ce-bg { transform: scale(1.08); }
+
+.ce-veil {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.4s;
+}
+.ce-veil--kg { background: linear-gradient(155deg, rgba(20,30,80,0.52) 0%, rgba(4,4,20,0.78) 100%); }
+.ce-veil--kz { background: linear-gradient(155deg, rgba(80,50,10,0.48) 0%, rgba(10,6,2,0.78) 100%); }
+.ce-panel:hover .ce-veil { opacity: 0.85; }
+
+.ce-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+.ce-flag {
+  font-size: 54px;
+  line-height: 1;
+  display: block;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.65));
+  transition: transform 0.45s var(--ease);
+}
+.ce-panel:hover .ce-flag { transform: scale(1.14) translateY(-6px); }
+
+.ce-name {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.2vw, 68px);
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  text-shadow: 0 3px 22px rgba(0,0,0,0.55);
+  white-space: nowrap;
+}
+
+.ce-tagline {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.48);
+  margin-top: 2px;
+}
+
+.ce-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--gold-bright);
+  margin-top: 8px;
+}
+
+.ce-cta {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.30);
+  border-radius: var(--r-full);
+  padding: 12px 30px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s 0.05s, transform 0.35s 0.05s, background 0.25s, border-color 0.25s;
+}
+.ce-panel:hover .ce-cta { opacity: 1; transform: translateY(0); }
+.ce-cta:hover { background: rgba(184,148,62,0.18); border-color: rgba(184,148,62,0.6); }
+
+/* Divider */
+.ce-divider {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+  width: 1px;
+}
+.ce-divider-line {
+  flex: 1;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(184,148,62,0.42), transparent);
+}
+.ce-divider-badge {
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: var(--gold-bright);
+  background: rgba(8,6,18,0.88);
+  border: 1px solid rgba(184,148,62,0.38);
+  border-radius: var(--r-full);
+  padding: 9px 11px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+}
+
+/* Skip button */
+.ce-skip {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--r-full);
+  color: rgba(255,255,255,0.45);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.25s, color 0.25s;
+}
+.ce-skip:hover { background: rgba(255,255,255,0.13); color: rgba(255,255,255,0.82); }
+
+/* Mobile: stack vertically */
+@media (max-width: 600px) {
+  .ce-overlay { flex-direction: column; }
+  .ce-overlay.hov-kg .ce-panel--kg,
+  .ce-overlay.hov-kz .ce-panel--kz { flex: 1.5; }
+  .ce-overlay.hov-kg .ce-panel--kz,
+  .ce-overlay.hov-kz .ce-panel--kg { flex: 0.5; }
+  .ce-divider {
+    left: 0; right: 0;
+    top: 50%; bottom: auto;
+    transform: translateY(-50%);
+    flex-direction: row;
+    width: 100%; height: 1px;
+  }
+  .ce-divider-line { flex: 1; width: auto; height: 1px; }
+  .ce-name { font-size: clamp(30px, 9vw, 50px); }
+  .ce-flag { font-size: 38px; }
+  .ce-tagline { display: none; }
+  .ce-cta { margin-top: 14px; padding: 10px 22px; }
+}
+
+/* ── Nav country toggle ── */
+.nav-country-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.20);
+  border-radius: var(--r-full);
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+.lux-nav.scrolled .nav-country-btn {
+  color: var(--gold-dim);
+  background: var(--gold-glow);
+  border-color: var(--border-gold);
+}
+.nav-country-btn:hover { background: rgba(255,255,255,0.14); }
+.lux-nav.scrolled .nav-country-btn:hover { background: rgba(184,148,62,0.2); }
+@media (max-width: 900px) { .nav-country-btn { display: none; } }
+
+/* ── KZ banner ── */
+.kz-banner {
+  display: none;
+  background: linear-gradient(90deg, #08051a 0%, #11082a 100%);
+  border-bottom: 1px solid rgba(184,148,62,0.28);
+  padding: 13px 0;
+}
+.kz-banner-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.kz-banner-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.72);
+}
+.kz-banner-text strong { color: rgba(255,255,255,0.92); }
+.kz-banner-switch {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-full);
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.25s;
+  white-space: nowrap;
+}
+.kz-banner-switch:hover { background: var(--gold-glow); }
+
+/* ── KZ tours placeholder ── */
+.kz-ph { display: none; padding: 16px 0 60px; }
+.kz-ph-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--bg-2);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-lg);
+  padding: 56px 48px;
+  text-align: center;
+}
+.kz-ph-icon { font-size: 64px; margin-bottom: 20px; display: block; }
+.kz-ph-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--text-1);
+  margin-bottom: 16px;
+}
+.kz-ph-desc {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.75;
+  max-width: 500px;
+  margin: 0 auto 32px;
+}
+.kz-ph-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.kz-ph-dests {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.kz-ph-dest {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+@media (max-width: 600px) {
+  .kz-ph-card { padding: 40px 24px; }
+  .kz-ph-dests { grid-template-columns: repeat(2, 1fr); }
+  .kz-banner-text strong { display: none; }
+}
+
 @media (max-width: 480px) {
   .prices-grid { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: 1fr; }

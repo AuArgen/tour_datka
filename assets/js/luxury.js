@@ -190,8 +190,93 @@ function initPageLoader() {
   });
 }
 
+// ── Apply country to page state ─────────────────────────────
+function applyCountry(country) {
+  const flagEl      = document.getElementById('navCountryFlag');
+  const labelEl     = document.getElementById('navCountryLabel');
+  const kzBanner    = document.getElementById('kzBanner');
+  const kzSection   = document.getElementById('kzToursSection');
+  const filterBar   = document.getElementById('filterBar');
+  const toursGrid   = document.getElementById('toursGrid');
+  const h2          = document.querySelector('#tours .section-head h2');
+  const lead        = document.querySelector('#tours .section-head .lead');
+
+  if (country === 'kz') {
+    if (flagEl)   flagEl.textContent  = '🇰🇿';
+    if (labelEl)  labelEl.textContent = 'Kazakhstan';
+    if (kzBanner)  kzBanner.style.display   = 'block';
+    if (kzSection) kzSection.style.display  = 'block';
+    if (filterBar) filterBar.style.display  = 'none';
+    if (toursGrid) toursGrid.style.display  = 'none';
+    if (h2)   h2.innerHTML   = 'Kazakhstan <em>Experiences</em>';
+    if (lead) lead.textContent = 'Discover the majestic landscapes of Kazakhstan — extraordinary tours launching soon. Inquire below to be among the first.';
+  } else {
+    if (flagEl)   flagEl.textContent  = '🇰🇬';
+    if (labelEl)  labelEl.textContent = 'Kyrgyzstan';
+    if (kzBanner)  kzBanner.style.display   = 'none';
+    if (kzSection) kzSection.style.display  = 'none';
+    if (filterBar) filterBar.style.display  = '';
+    if (toursGrid) toursGrid.style.display  = '';
+    if (h2)   h2.innerHTML   = '21 Extraordinary <em>Experiences</em>';
+    if (lead) lead.textContent = 'From half-day city walks to 5-day nomadic expeditions — every tour is private, customised, and led by the finest local guides.';
+  }
+}
+
+// ── Country entry overlay ───────────────────────────────────
+function initCountryEntry() {
+  const overlay = document.getElementById('ceOverlay');
+  if (!overlay) return;
+
+  function choose(country) {
+    sessionStorage.setItem('nc_country', country);
+    overlay.classList.add('leaving');
+    setTimeout(() => overlay.classList.add('gone'), 780);
+    applyCountry(country);
+  }
+
+  // Nav toggle — re-opens the overlay
+  const navBtn = document.getElementById('navCountryBtn');
+  if (navBtn) {
+    navBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('nc_country');
+      overlay.classList.remove('leaving', 'gone', 'hov-kg', 'hov-kz');
+    });
+  }
+
+  // KZ banner switch to Kyrgyzstan
+  const kzSwitch = document.getElementById('kzBannerSwitch');
+  if (kzSwitch) {
+    kzSwitch.addEventListener('click', () => {
+      sessionStorage.setItem('nc_country', 'kg');
+      applyCountry('kg');
+    });
+  }
+
+  // If already chosen this session — skip overlay
+  const saved = sessionStorage.getItem('nc_country');
+  if (saved) {
+    overlay.classList.add('gone');
+    applyCountry(saved);
+    return;
+  }
+
+  const panelKG = document.getElementById('cePanelKG');
+  const panelKZ = document.getElementById('cePanelKZ');
+  const skipBtn = document.getElementById('ceSkip');
+
+  panelKG.addEventListener('mouseenter', () => overlay.classList.add('hov-kg'));
+  panelKG.addEventListener('mouseleave', () => overlay.classList.remove('hov-kg'));
+  panelKZ.addEventListener('mouseenter', () => overlay.classList.add('hov-kz'));
+  panelKZ.addEventListener('mouseleave', () => overlay.classList.remove('hov-kz'));
+
+  panelKG.addEventListener('click', () => choose('kg'));
+  panelKZ.addEventListener('click', () => choose('kz'));
+  skipBtn.addEventListener('click', () => choose('kg'));
+}
+
 // ── Init all ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  initCountryEntry();
   initNav();
   initMobileMenu();
   initReveal();

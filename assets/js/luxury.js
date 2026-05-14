@@ -190,36 +190,177 @@ function initPageLoader() {
   });
 }
 
-// ── Apply country to page state ─────────────────────────────
-function applyCountry(country) {
-  const flagEl      = document.getElementById('navCountryFlag');
-  const labelEl     = document.getElementById('navCountryLabel');
-  const kzBanner    = document.getElementById('kzBanner');
-  const kzSection   = document.getElementById('kzToursSection');
-  const filterBar   = document.getElementById('filterBar');
-  const toursGrid   = document.getElementById('toursGrid');
-  const h2          = document.querySelector('#tours .section-head h2');
-  const lead        = document.querySelector('#tours .section-head .lead');
-
-  if (country === 'kz') {
-    if (flagEl)   flagEl.textContent  = '🇰🇿';
-    if (labelEl)  labelEl.textContent = 'Kazakhstan';
-    if (kzBanner)  kzBanner.style.display   = 'block';
-    if (kzSection) kzSection.style.display  = 'block';
-    if (filterBar) filterBar.style.display  = 'none';
-    if (toursGrid) toursGrid.style.display  = 'none';
-    if (h2)   h2.innerHTML   = 'Kazakhstan <em>Experiences</em>';
-    if (lead) lead.textContent = 'Discover the majestic landscapes of Kazakhstan — extraordinary tours launching soon. Inquire below to be among the first.';
-  } else {
-    if (flagEl)   flagEl.textContent  = '🇰🇬';
-    if (labelEl)  labelEl.textContent = 'Kyrgyzstan';
-    if (kzBanner)  kzBanner.style.display   = 'none';
-    if (kzSection) kzSection.style.display  = 'none';
-    if (filterBar) filterBar.style.display  = '';
-    if (toursGrid) toursGrid.style.display  = '';
-    if (h2)   h2.innerHTML   = '21 Extraordinary <em>Experiences</em>';
-    if (lead) lead.textContent = 'From half-day city walks to 5-day nomadic expeditions — every tour is private, customised, and led by the finest local guides.';
+// ── Country content data ────────────────────────────────────
+const COUNTRY_DATA = {
+  kg: {
+    navFlag: '🇰🇬', navLabel: 'Kyrgyzstan',
+    heroLabel: "TripAdvisor's #1 Choice · Est. 2016",
+    heroTitle: 'Discover the <em>Soul</em><br>of Kyrgyzstan',
+    heroSub: 'Private tours crafted with passion — from the ancient Silk Road to high-altitude nomad lakes. 3,000+ happy travellers served.',
+    heroFeatures: [
+      { icon:'🏔️', label:'Tian Shan Mountains',  sub:'Hiking · Wildlife · Scenic Trails'     },
+      { icon:'🌊', label:'Issyk-Kul Lake',        sub:'Beaches · Canyons · Day Trips'         },
+      { icon:'🏕️', label:'Song-Kul Nomad Life',   sub:'Yurt Camps · Horses · Stargazing'      },
+      { icon:'🦅', label:'Eagle Hunting',          sub:'Ancient Tradition · Culture'           },
+      { icon:'🐎', label:'Horseback Riding',       sub:'Multi-day Treks · Adventure'           },
+    ],
+    stats: ['8+','3000+','21','#1'],
+    statLabels: ['Years of Experience','Happy Clients','Unique Tours','TripAdvisor Rated'],
+    badgeNum: '2016', badgeText: 'Founded',
+    aboutTitle: 'Born during the <em>World Nomad Games</em>',
+    aboutLead1: 'Nomadic Nations opened for business in 2016 and quickly developed a reputation for efficient, unique and high-quality customized tours for individuals and groups across Kyrgyzstan.',
+    aboutLead2: 'Join us and experience the amazing nature of Kyrgyzstan while learning about nomadic lifestyles through visits with local people along the ancient routes of the Silk Road.',
+    toursLabel: 'Our Collection',
+    toursTitle: '21 Extraordinary <em>Experiences</em>',
+    toursLead: 'From half-day city walks to 5-day nomadic expeditions — every tour is private, customised, and led by the finest local guides.',
+    crosslinkFlag: '🇰🇿', crosslinkTitle: 'Also travelling to Kazakhstan?',
+    crosslinkSub: 'We offer private tours across Kazakhstan — Charyn Canyon, Almaty, Kolsai Lakes and more.',
+    crosslinkBtn: 'View Kazakhstan Tours →',
+    crosslinkTarget: 'kz',
+  },
+  kz: {
+    navFlag: '🇰🇿', navLabel: 'Kazakhstan',
+    heroLabel: 'New Destination · Now Booking',
+    heroTitle: 'Discover the <em>Soul</em><br>of Kazakhstan',
+    heroSub: 'Private tours across the vast Great Steppe — from cosmopolitan Almaty to the Grand Canyon of Central Asia. Crafted by the same team behind 3,000+ happy travellers.',
+    heroFeatures: [
+      { icon:'🏜️', label:'Charyn Canyon',          sub:'Trekking · Red Rocks · Photography'   },
+      { icon:'🌆', label:'Almaty City',             sub:'Markets · Culture · Architecture'     },
+      { icon:'🏔️', label:'Kolsai & Kaindy Lakes',  sub:'Alpine Trek · Sunken Forest'          },
+      { icon:'🦅', label:'Kazakh Eagle Hunting',    sub:'4,000-Year-Old Tradition · UNESCO'    },
+      { icon:'🏛️', label:'Ancient Turkestan',       sub:'Silk Road · UNESCO Mausoleum'         },
+    ],
+    stats: ['8+','500+','8','NEW'],
+    statLabels: ['Years of Experience','Happy Clients','Kazakhstan Tours','Destination 2024'],
+    badgeNum: '2024', badgeText: 'Launched',
+    aboutTitle: 'Expanding to the <em>Great Steppe</em>',
+    aboutLead1: 'Building on 8 years of award-winning tours in Kyrgyzstan, Nomadic Nations now brings the same passion and quality to Kazakhstan — Central Asia\'s largest and most diverse country.',
+    aboutLead2: 'From the ultramodern skyline of Almaty to the ancient Silk Road city of Turkestan and the breathtaking Charyn Canyon — Kazakhstan is a destination of epic contrasts waiting to be explored.',
+    toursLabel: 'Kazakhstan Collection',
+    toursTitle: '8 Kazakhstan <em>Experiences</em>',
+    toursLead: 'Handcrafted private tours across Kazakhstan — from half-day city walks in Almaty to multi-day canyon and mountain adventures.',
+    crosslinkFlag: '🇰🇬', crosslinkTitle: 'Also travelling to Kyrgyzstan?',
+    crosslinkSub: 'We offer 21 private tours across Kyrgyzstan — Song-Kul, Issyk-Kul, Tian Shan and the ancient Silk Road.',
+    crosslinkBtn: 'View Kyrgyzstan Tours →',
+    crosslinkTarget: 'kg',
   }
+};
+
+// ── Rebuild hero features panel ─────────────────────────────
+function rebuildHeroFeatures(features) {
+  const wrap = document.querySelector('.hero-features');
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div class="hero-features-head">
+      <span class="hero-features-head-line"></span>
+      <span>Top Experiences</span>
+      <span class="hero-features-head-line"></span>
+    </div>
+    ${features.map(f => `
+    <a href="#tours" class="hero-feature">
+      <span class="hero-feature-icon">${f.icon}</span>
+      <div class="hero-feature-body">
+        <div class="hero-feature-label">${f.label}</div>
+        <div class="hero-feature-sub">${f.sub}</div>
+      </div>
+      <span class="hero-feature-arrow">›</span>
+    </a>`).join('')}
+  `;
+}
+
+// ── Apply country to entire page ─────────────────────────────
+function applyCountry(country) {
+  const d = COUNTRY_DATA[country] || COUNTRY_DATA.kg;
+
+  // Nav
+  const flagEl  = document.getElementById('navCountryFlag');
+  const labelEl = document.getElementById('navCountryLabel');
+  if (flagEl)  flagEl.textContent  = d.navFlag;
+  if (labelEl) labelEl.textContent = d.navLabel;
+
+  // KZ banner
+  const kzBanner = document.getElementById('kzBanner');
+  if (kzBanner) kzBanner.style.display = country === 'kz' ? 'block' : 'none';
+
+  // Hero text
+  const heroLabel = document.getElementById('heroLabelSpan');
+  const heroTitle = document.getElementById('heroTitle');
+  const heroSub   = document.getElementById('heroSub');
+  if (heroLabel) heroLabel.textContent = d.heroLabel;
+  if (heroTitle) heroTitle.innerHTML   = d.heroTitle;
+  if (heroSub)   heroSub.textContent   = d.heroSub;
+  rebuildHeroFeatures(d.heroFeatures);
+
+  // Stats
+  const counts = [0,1,2,3];
+  counts.forEach(i => {
+    const numEl = document.getElementById('statNum' + i);
+    const lblEl = document.getElementById('statLbl' + i);
+    if (numEl) { numEl.textContent = d.stats[i]; numEl.dataset.count = d.stats[i]; }
+    if (lblEl) lblEl.textContent = d.statLabels[i];
+  });
+
+  // About
+  const badgeNum  = document.getElementById('aboutBadgeNum');
+  const badgeText = document.getElementById('aboutBadgeText');
+  const aboutTitle = document.getElementById('aboutTitle');
+  const lead1      = document.getElementById('aboutLead1');
+  const lead2      = document.getElementById('aboutLead2');
+  if (badgeNum)   badgeNum.textContent   = d.badgeNum;
+  if (badgeText)  badgeText.textContent  = d.badgeText;
+  if (aboutTitle) aboutTitle.innerHTML   = d.aboutTitle;
+  if (lead1)      lead1.textContent      = d.aboutLead1;
+  if (lead2)      lead2.textContent      = d.aboutLead2;
+
+  // Tours section head
+  const toursLabel = document.querySelector('#tours .section-head .label');
+  const toursH2    = document.querySelector('#tours .section-head h2');
+  const toursLead  = document.querySelector('#tours .section-head .lead');
+  if (toursLabel) toursLabel.textContent = d.toursLabel;
+  if (toursH2)    toursH2.innerHTML      = d.toursTitle;
+  if (toursLead)  toursLead.textContent  = d.toursLead;
+
+  // Show/hide grids
+  const filterBarKG = document.getElementById('filterBar');
+  const gridKG      = document.getElementById('toursGrid');
+  const filterBarKZ = document.getElementById('filterBarKZ');
+  const gridKZ      = document.getElementById('toursGridKZ');
+  const isKZ        = country === 'kz';
+  if (filterBarKG) filterBarKG.style.display = isKZ ? 'none' : '';
+  if (gridKG)      gridKG.style.display      = isKZ ? 'none' : '';
+  if (filterBarKZ) filterBarKZ.style.display = isKZ ? '' : 'none';
+  if (gridKZ)      gridKZ.style.display      = isKZ ? '' : 'none';
+
+  // Cross-link
+  const clFlag  = document.getElementById('crosslinkFlag');
+  const clTitle = document.getElementById('crosslinkTitle');
+  const clSub   = document.getElementById('crosslinkSub');
+  const clBtn   = document.getElementById('crosslinkBtn');
+  if (clFlag)  clFlag.textContent  = d.crosslinkFlag;
+  if (clTitle) clTitle.textContent = d.crosslinkTitle;
+  if (clSub)   clSub.textContent   = d.crosslinkSub;
+  if (clBtn) {
+    clBtn.textContent = d.crosslinkBtn;
+    clBtn.dataset.target = d.crosslinkTarget;
+  }
+}
+
+// ── KZ tour filter ──────────────────────────────────────────
+function initFilterKZ() {
+  const btns     = document.querySelectorAll('.filter-btn-kz');
+  const wrappers = document.querySelectorAll('#toursGridKZ > [data-cat-kz]');
+  if (!btns.length) return;
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filterKz;
+      wrappers.forEach(w => {
+        const show = cat === 'all' || w.dataset.catKz === cat;
+        w.style.display = show ? '' : 'none';
+      });
+    });
+  });
 }
 
 // ── Country entry overlay ───────────────────────────────────
@@ -252,6 +393,17 @@ function initCountryEntry() {
     });
   }
 
+  // Cross-link button (switch country and scroll to tours)
+  const crosslinkBtn = document.getElementById('crosslinkBtn');
+  if (crosslinkBtn) {
+    crosslinkBtn.addEventListener('click', () => {
+      const target = crosslinkBtn.dataset.target || 'kz';
+      sessionStorage.setItem('nc_country', target);
+      applyCountry(target);
+      document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
   // If already chosen this session — skip overlay
   const saved = sessionStorage.getItem('nc_country');
   if (saved) {
@@ -277,6 +429,7 @@ function initCountryEntry() {
 // ── Init all ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initCountryEntry();
+  initFilterKZ();
   initNav();
   initMobileMenu();
   initReveal();

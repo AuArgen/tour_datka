@@ -1662,6 +1662,112 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
+   KZ TOUR CARD BACKGROUNDS & ICON
+   ============================================================ */
+.kz-no-img { background-image: none !important; }
+
+.kz-img-city    { background: linear-gradient(135deg, #1a0e06 0%, #2e1a0c 100%); }
+.kz-img-food    { background: linear-gradient(135deg, #1a0908 0%, #2c1410 100%); }
+.kz-img-canyon  { background: linear-gradient(135deg, #1a0c04 0%, #301806 100%); }
+.kz-img-lake    { background: linear-gradient(135deg, #041a18 0%, #082e2a 100%); }
+.kz-img-adventure { background: linear-gradient(135deg, #180c02 0%, #2e1e06 100%); }
+.kz-img-history { background: linear-gradient(135deg, #141008 0%, #22180a 100%); }
+
+.kz-card-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity var(--t-med), transform var(--t-med) var(--ease);
+}
+.tour-card:hover .kz-card-icon { opacity: 0.75; transform: scale(1.08); }
+
+/* KZ filter buttons (reuse .filter-btn styles) */
+.filter-btn-kz {
+  padding: 9px 22px;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+.filter-btn-kz:hover,
+.filter-btn-kz.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+/* ── Country cross-link ── */
+.country-crosslink {
+  margin-top: 56px;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-lg);
+  background: linear-gradient(135deg, var(--bg-2) 0%, #fdf8f0 100%);
+  padding: 24px 32px;
+}
+.country-crosslink-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.country-crosslink-flag { font-size: 36px; flex-shrink: 0; }
+.country-crosslink-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 200px;
+}
+.country-crosslink-text strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.country-crosslink-text span {
+  font-size: 13px;
+  color: var(--text-3);
+}
+.country-crosslink-btn {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-full);
+  padding: 11px 22px;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.country-crosslink-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .country-crosslink { padding: 20px; }
+  .country-crosslink-btn { width: 100%; text-align: center; }
+}
+
+/* ── Remove old kz-ph styles (replaced by real cards) ── */
+.kz-ph, .kz-ph-card, .kz-ph-title, .kz-ph-desc,
+.kz-ph-actions, .kz-ph-dests, .kz-ph-dest, .kz-ph-icon { display: none !important; }
+
+/* ============================================================
    COUNTRY ENTRY OVERLAY
    ============================================================ */
 .ce-overlay {

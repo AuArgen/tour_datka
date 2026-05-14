@@ -2137,3 +2137,203 @@ img { max-width: 100%; display: block; }
   .hero-dots { justify-content: center; }
   .hero-country-tabs { justify-content: center; }
 }
+
+/* ══════════════════════════════════════════════════
+   UZBEKISTAN card styles
+══════════════════════════════════════════════════ */
+.uz-no-img { background-image: none !important; }
+.uz-img-city    { background: linear-gradient(135deg, #1a0900 0%, #2c1808 100%); }
+.uz-img-history { background: linear-gradient(135deg, #141008 0%, #241a0a 100%); }
+.uz-img-nature  { background: linear-gradient(135deg, #081008 0%, #0e200e 100%); }
+.uz-img-multi   { background: linear-gradient(135deg, #100808 0%, #1e1008 100%); }
+
+.uz-card-icon {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 52px; opacity: 0.5;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.tour-card:hover .uz-card-icon { opacity: 0.75; transform: translate(-50%, -50%) scale(1.08); }
+
+.filter-btn-uz {
+  padding: 8px 18px; border-radius: 50px;
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-2); cursor: pointer; font-size: 13px;
+  font-weight: 500; transition: all 0.22s; white-space: nowrap;
+}
+.filter-btn-uz:hover,
+.filter-btn-uz.active {
+  background: var(--gold); border-color: var(--gold); color: #fff;
+}
+
+/* ══════════════════════════════════════════════════
+   TAJIKISTAN card styles
+══════════════════════════════════════════════════ */
+.tj-no-img { background-image: none !important; }
+.tj-img-city      { background: linear-gradient(135deg, #060e0c 0%, #0a1e18 100%); }
+.tj-img-nature    { background: linear-gradient(135deg, #06080e 0%, #0a1020 100%); }
+.tj-img-adventure { background: linear-gradient(135deg, #0e0808 0%, #201010 100%); }
+.tj-img-multi     { background: linear-gradient(135deg, #080a0e 0%, #10121e 100%); }
+
+.tj-card-icon {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 52px; opacity: 0.5;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.tour-card:hover .tj-card-icon { opacity: 0.75; transform: translate(-50%, -50%) scale(1.08); }
+
+.filter-btn-tj {
+  padding: 8px 18px; border-radius: 50px;
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-2); cursor: pointer; font-size: 13px;
+  font-weight: 500; transition: all 0.22s; white-space: nowrap;
+}
+.filter-btn-tj:hover,
+.filter-btn-tj.active {
+  background: var(--gold); border-color: var(--gold); color: #fff;
+}
+
+/* ══════════════════════════════════════════════════
+   CROSS-BORDER ROUTES SECTION
+══════════════════════════════════════════════════ */
+.cross-border-section {
+  background: linear-gradient(135deg, #07070f 0%, #0e0e1c 100%);
+  border-radius: var(--r-md);
+  padding: 48px 44px;
+  margin: 48px 0 24px;
+  border: 1px solid rgba(184,148,62,0.18);
+  position: relative;
+  overflow: hidden;
+}
+.cross-border-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(184,148,62,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cross-border-header {
+  text-align: center;
+  margin-bottom: 36px;
+  position: relative;
+}
+.cross-border-header .label {
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+.cross-border-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: #f0f0f8;
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+.cross-border-title em { color: var(--gold); font-style: italic; }
+.cross-border-sub {
+  color: rgba(255,255,255,0.45);
+  font-size: 13.5px;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.cross-border-routes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  position: relative;
+}
+
+.cross-route-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(184,148,62,0.14);
+  border-radius: var(--r-md);
+  padding: 26px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.28s, background 0.28s, transform 0.28s;
+}
+.cross-route-card:hover {
+  border-color: rgba(184,148,62,0.45);
+  background: rgba(184,148,62,0.06);
+  transform: translateY(-3px);
+}
+
+.cross-route-flags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cross-route-flag { font-size: 30px; line-height: 1; flex-shrink: 0; }
+
+.cross-route-connector {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cross-route-connector-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(184,148,62,0.5), rgba(184,148,62,0.15));
+}
+.cross-route-connector-arrow {
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.cross-route-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: #eeeef8;
+  line-height: 1.3;
+}
+.cross-route-detail {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 3px;
+}
+.cross-route-border {
+  font-size: 12px;
+  color: var(--gold-dim);
+  margin-top: 2px;
+}
+
+.cross-route-btn {
+  margin-top: 4px;
+  background: transparent;
+  border: 1px solid rgba(184,148,62,0.5);
+  color: var(--gold);
+  border-radius: 50px;
+  padding: 9px 18px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.22s, color 0.22s, border-color 0.22s;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+.cross-route-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .cross-border-section { padding: 32px 20px; }
+  .cross-border-title { font-size: 21px; }
+  .cross-border-routes { grid-template-columns: 1fr; }
+}

@@ -198,11 +198,11 @@ const COUNTRY_DATA = {
     heroTitle: 'Discover the <em>Soul</em><br>of Kyrgyzstan',
     heroSub: 'Private tours crafted with passion — from the ancient Silk Road to high-altitude nomad lakes. 3,000+ happy travellers served.',
     heroFeatures: [
-      { icon:'🏔️', label:'Tian Shan Mountains',  sub:'Hiking · Wildlife · Scenic Trails'     },
-      { icon:'🌊', label:'Issyk-Kul Lake',        sub:'Beaches · Canyons · Day Trips'         },
-      { icon:'🏕️', label:'Song-Kul Nomad Life',   sub:'Yurt Camps · Horses · Stargazing'      },
-      { icon:'🦅', label:'Eagle Hunting',          sub:'Ancient Tradition · Culture'           },
-      { icon:'🐎', label:'Horseback Riding',       sub:'Multi-day Treks · Adventure'           },
+      { icon:'🏔️', label:'Tian Shan Mountains',  sub:'Hiking · Wildlife · Scenic Trails'  },
+      { icon:'🌊', label:'Issyk-Kul Lake',        sub:'Beaches · Canyons · Day Trips'      },
+      { icon:'🏕️', label:'Song-Kul Nomad Life',   sub:'Yurt Camps · Horses · Stargazing'   },
+      { icon:'🦅', label:'Eagle Hunting',          sub:'Ancient Tradition · Culture'        },
+      { icon:'🐎', label:'Horseback Riding',       sub:'Multi-day Treks · Adventure'        },
     ],
     stats: ['8+','3000+','21','#1'],
     statLabels: ['Years of Experience','Happy Clients','Unique Tours','TripAdvisor Rated'],
@@ -213,10 +213,11 @@ const COUNTRY_DATA = {
     toursLabel: 'Our Collection',
     toursTitle: '21 Extraordinary <em>Experiences</em>',
     toursLead: 'From half-day city walks to 5-day nomadic expeditions — every tour is private, customised, and led by the finest local guides.',
-    crosslinkFlag: '🇰🇿', crosslinkTitle: 'Also travelling to Kazakhstan?',
-    crosslinkSub: 'We offer private tours across Kazakhstan — Charyn Canyon, Almaty, Kolsai Lakes and more.',
-    crosslinkBtn: 'View Kazakhstan Tours →',
-    crosslinkTarget: 'kz',
+    crossRoutes: [
+      { toCode:'kz', toFlag:'🇰🇿', toName:'Kazakhstan', fromCity:'Bishkek', toCity:'Almaty',    border:'Korday Border Crossing',   time:'~3–4 hrs by road' },
+      { toCode:'uz', toFlag:'🇺🇿', toName:'Uzbekistan', fromCity:'Osh',     toCity:'Andijan',   border:'Dostuk Border Crossing',   time:'~4–5 hrs by road' },
+      { toCode:'tj', toFlag:'🇹🇯', toName:'Tajikistan', fromCity:'Osh',     toCity:'Khodjand',  border:'Karameik Border Crossing', time:'~5–6 hrs by road' },
+    ],
   },
   kz: {
     navFlag: '🇰🇿', navLabel: 'Kazakhstan',
@@ -224,11 +225,11 @@ const COUNTRY_DATA = {
     heroTitle: 'Discover the <em>Soul</em><br>of Kazakhstan',
     heroSub: 'Private tours across the vast Great Steppe — from cosmopolitan Almaty to the Grand Canyon of Central Asia. Crafted by the same team behind 3,000+ happy travellers.',
     heroFeatures: [
-      { icon:'🏜️', label:'Charyn Canyon',          sub:'Trekking · Red Rocks · Photography'   },
-      { icon:'🌆', label:'Almaty City',             sub:'Markets · Culture · Architecture'     },
-      { icon:'🏔️', label:'Kolsai & Kaindy Lakes',  sub:'Alpine Trek · Sunken Forest'          },
-      { icon:'🦅', label:'Kazakh Eagle Hunting',    sub:'4,000-Year-Old Tradition · UNESCO'    },
-      { icon:'🏛️', label:'Ancient Turkestan',       sub:'Silk Road · UNESCO Mausoleum'         },
+      { icon:'🏜️', label:'Charyn Canyon',         sub:'Trekking · Red Rocks · Photography' },
+      { icon:'🌆', label:'Almaty City',            sub:'Markets · Culture · Architecture'   },
+      { icon:'🏔️', label:'Kolsai & Kaindy Lakes', sub:'Alpine Trek · Sunken Forest'         },
+      { icon:'🦅', label:'Kazakh Eagle Hunting',   sub:'4,000-Year-Old Tradition · UNESCO'  },
+      { icon:'🏛️', label:'Ancient Turkestan',      sub:'Silk Road · UNESCO Mausoleum'       },
     ],
     stats: ['8+','500+','8','NEW'],
     statLabels: ['Years of Experience','Happy Clients','Kazakhstan Tours','Destination 2024'],
@@ -239,11 +240,64 @@ const COUNTRY_DATA = {
     toursLabel: 'Kazakhstan Collection',
     toursTitle: '8 Kazakhstan <em>Experiences</em>',
     toursLead: 'Handcrafted private tours across Kazakhstan — from half-day city walks in Almaty to multi-day canyon and mountain adventures.',
-    crosslinkFlag: '🇰🇬', crosslinkTitle: 'Also travelling to Kyrgyzstan?',
-    crosslinkSub: 'We offer 21 private tours across Kyrgyzstan — Song-Kul, Issyk-Kul, Tian Shan and the ancient Silk Road.',
-    crosslinkBtn: 'View Kyrgyzstan Tours →',
-    crosslinkTarget: 'kg',
-  }
+    crossRoutes: [
+      { toCode:'kg', toFlag:'🇰🇬', toName:'Kyrgyzstan', fromCity:'Almaty',    toCity:'Bishkek',  border:'Korday Border Crossing',       time:'~3–4 hrs by road' },
+      { toCode:'uz', toFlag:'🇺🇿', toName:'Uzbekistan', fromCity:'Shymkent',  toCity:'Tashkent', border:'Zhybek Zholy Border Crossing', time:'~2 hrs by road'   },
+    ],
+  },
+  uz: {
+    navFlag: '🇺🇿', navLabel: 'Uzbekistan',
+    heroLabel: 'UNESCO Silk Road · Now Booking',
+    heroTitle: 'Discover the <em>Silk Road</em><br>of Uzbekistan',
+    heroSub: 'Step into the world of Tamerlane and the Silk Road — private tours across Tashkent, Samarkand, Bukhara and Khiva. Four UNESCO cities, one extraordinary journey.',
+    heroFeatures: [
+      { icon:'🏛️', label:'Registan, Samarkand',  sub:'UNESCO · Silk Road Masterpiece'      },
+      { icon:'🌙', label:'Bukhara Old City',      sub:'Medieval Streets · Ancient Bazaars'  },
+      { icon:'🏰', label:'Khiva Ichan Kala',      sub:'Walled City · Living Museum'         },
+      { icon:'🕌', label:'Tashkent Bazaars',      sub:'Chorsu Market · Metro Art'           },
+      { icon:'🗺️', label:'Silk Road Route',       sub:'Tashkent → Samarkand → Bukhara'     },
+    ],
+    stats: ['8+','200+','6','UNESCO'],
+    statLabels: ['Years of Experience','Happy Clients','Uzbekistan Tours','Silk Road Cities'],
+    badgeNum: '2025', badgeText: 'Launched',
+    aboutTitle: 'Unveiling the <em>Silk Road Legacy</em>',
+    aboutLead1: 'Nomadic Nations now extends the same award-winning private tour experience into Uzbekistan — the heart of the ancient Silk Road and home to four UNESCO World Heritage cities.',
+    aboutLead2: 'From the legendary Registan of Samarkand to the walled oasis of Khiva, our local guides reveal centuries of Islamic architecture, trade history, and living traditions that have shaped Central Asian civilisation.',
+    toursLabel: 'Uzbekistan Collection',
+    toursTitle: '6 Silk Road <em>Experiences</em>',
+    toursLead: 'Private tours across Uzbekistan\'s UNESCO cities — from half-day city walks to the complete four-city Silk Road journey.',
+    crossRoutes: [
+      { toCode:'kg', toFlag:'🇰🇬', toName:'Kyrgyzstan', fromCity:'Andijan',   toCity:'Osh',       border:'Dostuk Border Crossing',       time:'~4–5 hrs by road' },
+      { toCode:'tj', toFlag:'🇹🇯', toName:'Tajikistan', fromCity:'Samarkand', toCity:'Dushanbe',  border:'Oybek Border Crossing',        time:'~4–5 hrs by road' },
+      { toCode:'kz', toFlag:'🇰🇿', toName:'Kazakhstan', fromCity:'Tashkent',  toCity:'Shymkent',  border:'Zhybek Zholy Border Crossing', time:'~2 hrs by road'   },
+    ],
+  },
+  tj: {
+    navFlag: '🇹🇯', navLabel: 'Tajikistan',
+    heroLabel: 'Roof of the World · Now Booking',
+    heroTitle: 'Discover the <em>Pamir</em><br>of Tajikistan',
+    heroSub: 'Venture to the world\'s second-highest mountain range — private tours across the Pamir Highway, Wakhan Valley and the Fann Mountains. Raw, remote and unforgettable.',
+    heroFeatures: [
+      { icon:'🛣️', label:'Pamir Highway M41',     sub:'Highest Roads · Epic Landscapes'     },
+      { icon:'🏔️', label:'Fann Mountains',         sub:'Alpine Lakes · Trekking · Wildlife'  },
+      { icon:'🏕️', label:'Wakhan Valley',           sub:'Ancient Corridor · Fortress Ruins'  },
+      { icon:'🏙️', label:'Dushanbe City',           sub:'Capital · Bazaars · Culture'         },
+      { icon:'💧', label:'Iskanderkul Lake',        sub:'Alexander\'s Lake · Waterfalls'      },
+    ],
+    stats: ['8+','100+','5','PAMIR'],
+    statLabels: ['Years of Experience','Happy Clients','Tajikistan Tours','Roof of the World'],
+    badgeNum: '2025', badgeText: 'Launched',
+    aboutTitle: 'Into the <em>Roof of the World</em>',
+    aboutLead1: 'Nomadic Nations brings its expertise in high-altitude adventures to Tajikistan — one of the most remote and spectacular destinations in Central Asia, home to the Pamir mountain range.',
+    aboutLead2: 'Drive the legendary Pamir Highway, trek to turquoise alpine lakes in the Fann Mountains, and explore the ancient Wakhan Corridor — a landscape of breathtaking raw beauty unchanged for centuries.',
+    toursLabel: 'Tajikistan Collection',
+    toursTitle: '5 Pamir <em>Expeditions</em>',
+    toursLead: 'Private tours across Tajikistan\'s wildest landscapes — from Dushanbe city walks to multi-day Pamir Highway adventures.',
+    crossRoutes: [
+      { toCode:'uz', toFlag:'🇺🇿', toName:'Uzbekistan', fromCity:'Dushanbe',  toCity:'Samarkand', border:'Oybek Border Crossing',    time:'~4–5 hrs by road' },
+      { toCode:'kg', toFlag:'🇰🇬', toName:'Kyrgyzstan', fromCity:'Khodjand',  toCity:'Osh',       border:'Karameik Border Crossing', time:'~5–6 hrs by road' },
+    ],
+  },
 };
 
 // ── Rebuild hero features panel ─────────────────────────────
@@ -268,6 +322,42 @@ function rebuildHeroFeatures(features) {
   `;
 }
 
+// ── Build cross-border routes section ───────────────────────
+function updateCrossBorderSection(country) {
+  const d = COUNTRY_DATA[country] || COUNTRY_DATA.kg;
+  const container = document.getElementById('crossBorderRoutes');
+  if (!container || !d.crossRoutes || !d.crossRoutes.length) return;
+
+  container.innerHTML = d.crossRoutes.map(route => `
+    <div class="cross-route-card">
+      <div class="cross-route-flags">
+        <span class="cross-route-flag">${d.navFlag}</span>
+        <div class="cross-route-connector">
+          <div class="cross-route-connector-line"></div>
+          <span class="cross-route-connector-arrow">→</span>
+        </div>
+        <span class="cross-route-flag">${route.toFlag}</span>
+      </div>
+      <div>
+        <div class="cross-route-title">${d.navLabel} → ${route.toName}</div>
+        <div class="cross-route-detail">${route.fromCity} → ${route.toCity}</div>
+        <div class="cross-route-border">🛂 ${route.border} · ${route.time}</div>
+      </div>
+      <button class="cross-route-btn" data-target="${route.toCode}">
+        Explore ${route.toName} Tours →
+      </button>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('.cross-route-btn[data-target]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = document.querySelector(`.hero-ctab[data-hct="${btn.dataset.target}"]`);
+      if (tab) tab.click();
+      document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
 // ── Apply country to entire page ─────────────────────────────
 function applyCountry(country) {
   const d = COUNTRY_DATA[country] || COUNTRY_DATA.kg;
@@ -283,11 +373,11 @@ function applyCountry(country) {
     t.classList.toggle('active', t.dataset.hct === country)
   );
 
-  // Hero text intentionally stays general — no per-country updates here
+  // Hero features panel
+  rebuildHeroFeatures(d.heroFeatures);
 
   // Stats
-  const counts = [0,1,2,3];
-  counts.forEach(i => {
+  [0,1,2,3].forEach(i => {
     const numEl = document.getElementById('statNum' + i);
     const lblEl = document.getElementById('statLbl' + i);
     if (numEl) { numEl.textContent = d.stats[i]; numEl.dataset.count = d.stats[i]; }
@@ -295,8 +385,8 @@ function applyCountry(country) {
   });
 
   // About
-  const badgeNum  = document.getElementById('aboutBadgeNum');
-  const badgeText = document.getElementById('aboutBadgeText');
+  const badgeNum   = document.getElementById('aboutBadgeNum');
+  const badgeText  = document.getElementById('aboutBadgeText');
   const aboutTitle = document.getElementById('aboutTitle');
   const lead1      = document.getElementById('aboutLead1');
   const lead2      = document.getElementById('aboutLead2');
@@ -306,34 +396,39 @@ function applyCountry(country) {
   if (lead1)      lead1.textContent      = d.aboutLead1;
   if (lead2)      lead2.textContent      = d.aboutLead2;
 
-  // Reorder tour sections: selected country first, other country below crosslink
-  const sectionHead = document.querySelector('#tours .section-head');
-  const filterBarKG = document.getElementById('filterBar');
-  const gridKG      = document.getElementById('toursGrid');
-  const filterBarKZ = document.getElementById('filterBarKZ');
-  const gridKZ      = document.getElementById('toursGridKZ');
-  const crosslink   = document.getElementById('countryCrosslink');
-  if (sectionHead && filterBarKG && gridKG && filterBarKZ && gridKZ && crosslink) {
-    [filterBarKG, gridKG, filterBarKZ, gridKZ, crosslink].forEach(el => { el.style.display = ''; });
-    if (country === 'kz') {
-      sectionHead.after(filterBarKZ, gridKZ, crosslink, filterBarKG, gridKG);
-    } else {
-      sectionHead.after(filterBarKG, gridKG, crosslink, filterBarKZ, gridKZ);
-    }
+  // Tours section header
+  const toursLabelEl = document.querySelector('#tours .section-head .label');
+  const toursTitleEl = document.querySelector('#tours .section-head .h2');
+  const toursLeadEl  = document.querySelector('#tours .section-head .lead');
+  if (toursLabelEl) toursLabelEl.textContent = d.toursLabel;
+  if (toursTitleEl) toursTitleEl.innerHTML   = d.toursTitle;
+  if (toursLeadEl)  toursLeadEl.textContent  = d.toursLead;
+
+  // Tour grids: show active country only, hide rest
+  const grids = {
+    kg: { filter: 'filterBar',   grid: 'toursGrid'   },
+    kz: { filter: 'filterBarKZ', grid: 'toursGridKZ' },
+    uz: { filter: 'filterBarUZ', grid: 'toursGridUZ' },
+    tj: { filter: 'filterBarTJ', grid: 'toursGridTJ' },
+  };
+  const sectionHead  = document.querySelector('#tours .section-head');
+  const crossBorder  = document.getElementById('crossBorderSection');
+  const activeFilter = document.getElementById(grids[country]?.filter);
+  const activeGrid   = document.getElementById(grids[country]?.grid);
+
+  Object.entries(grids).forEach(([code, ids]) => {
+    const f = document.getElementById(ids.filter);
+    const g = document.getElementById(ids.grid);
+    if (f) f.style.display = code === country ? '' : 'none';
+    if (g) g.style.display = code === country ? '' : 'none';
+  });
+
+  if (sectionHead && activeFilter && activeGrid && crossBorder) {
+    sectionHead.after(activeFilter, activeGrid, crossBorder);
   }
 
-  // Cross-link
-  const clFlag  = document.getElementById('crosslinkFlag');
-  const clTitle = document.getElementById('crosslinkTitle');
-  const clSub   = document.getElementById('crosslinkSub');
-  const clBtn   = document.getElementById('crosslinkBtn');
-  if (clFlag)  clFlag.textContent  = d.crosslinkFlag;
-  if (clTitle) clTitle.textContent = d.crosslinkTitle;
-  if (clSub)   clSub.textContent   = d.crosslinkSub;
-  if (clBtn) {
-    clBtn.textContent = d.crosslinkBtn;
-    clBtn.dataset.target = d.crosslinkTarget;
-  }
+  // Cross-border routes
+  updateCrossBorderSection(country);
 }
 
 // ── KZ tour filter ──────────────────────────────────────────
@@ -347,8 +442,41 @@ function initFilterKZ() {
       btn.classList.add('active');
       const cat = btn.dataset.filterKz;
       wrappers.forEach(w => {
-        const show = cat === 'all' || w.dataset.catKz === cat;
-        w.style.display = show ? '' : 'none';
+        w.style.display = cat === 'all' || w.dataset.catKz === cat ? '' : 'none';
+      });
+    });
+  });
+}
+
+// ── UZ tour filter ──────────────────────────────────────────
+function initFilterUZ() {
+  const btns     = document.querySelectorAll('.filter-btn-uz');
+  const wrappers = document.querySelectorAll('#toursGridUZ > [data-cat-uz]');
+  if (!btns.length) return;
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filterUz;
+      wrappers.forEach(w => {
+        w.style.display = cat === 'all' || w.dataset.catUz === cat ? '' : 'none';
+      });
+    });
+  });
+}
+
+// ── TJ tour filter ──────────────────────────────────────────
+function initFilterTJ() {
+  const btns     = document.querySelectorAll('.filter-btn-tj');
+  const wrappers = document.querySelectorAll('#toursGridTJ > [data-cat-tj]');
+  if (!btns.length) return;
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.filterTj;
+      wrappers.forEach(w => {
+        w.style.display = cat === 'all' || w.dataset.catTj === cat ? '' : 'none';
       });
     });
   });
@@ -360,6 +488,7 @@ function initHeroCountryTabs() {
   if (!tabs.length) return;
 
   function selectTab(country) {
+    if (!COUNTRY_DATA[country]) country = 'kg';
     tabs.forEach(t => t.classList.toggle('active', t.dataset.hct === country));
     sessionStorage.setItem('nc_country', country);
     applyCountry(country);
@@ -370,31 +499,24 @@ function initHeroCountryTabs() {
     document.querySelector('#tours')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }));
 
-  // Cross-link button
-  const crosslinkBtn = document.getElementById('crosslinkBtn');
-  if (crosslinkBtn) {
-    crosslinkBtn.addEventListener('click', () => {
-      const target = crosslinkBtn.dataset.target || 'kz';
-      selectTab(target);
-      document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-
   // Restore last choice
   const saved = sessionStorage.getItem('nc_country');
-  if (saved && saved !== 'kg') selectTab(saved);
+  if (saved && COUNTRY_DATA[saved] && saved !== 'kg') selectTab(saved);
+  else applyCountry('kg');
 }
 
 // ── Init all ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initHeroCountryTabs();
+  initFilter();
   initFilterKZ();
+  initFilterUZ();
+  initFilterTJ();
   initNav();
   initMobileMenu();
   initReveal();
   initCounters();
   initCardTilt();
-  initFilter();
   initHeroSearch();
   initSmoothScroll();
   initHeroParallax();

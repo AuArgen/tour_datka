@@ -283,14 +283,7 @@ function applyCountry(country) {
     t.classList.toggle('active', t.dataset.hct === country)
   );
 
-  // Hero text
-  const heroLabel = document.getElementById('heroLabelSpan');
-  const heroTitle = document.getElementById('heroTitle');
-  const heroSub   = document.getElementById('heroSub');
-  if (heroLabel) heroLabel.textContent = d.heroLabel;
-  if (heroTitle) heroTitle.innerHTML   = d.heroTitle;
-  if (heroSub)   heroSub.textContent   = d.heroSub;
-  rebuildHeroFeatures(d.heroFeatures);
+  // Hero text intentionally stays general — no per-country updates here
 
   // Stats
   const counts = [0,1,2,3];
@@ -313,24 +306,21 @@ function applyCountry(country) {
   if (lead1)      lead1.textContent      = d.aboutLead1;
   if (lead2)      lead2.textContent      = d.aboutLead2;
 
-  // Tours section head
-  const toursLabel = document.querySelector('#tours .section-head .label');
-  const toursH2    = document.querySelector('#tours .section-head h2');
-  const toursLead  = document.querySelector('#tours .section-head .lead');
-  if (toursLabel) toursLabel.textContent = d.toursLabel;
-  if (toursH2)    toursH2.innerHTML      = d.toursTitle;
-  if (toursLead)  toursLead.textContent  = d.toursLead;
-
-  // Show/hide grids
+  // Reorder tour sections: selected country first, other country below crosslink
+  const sectionHead = document.querySelector('#tours .section-head');
   const filterBarKG = document.getElementById('filterBar');
   const gridKG      = document.getElementById('toursGrid');
   const filterBarKZ = document.getElementById('filterBarKZ');
   const gridKZ      = document.getElementById('toursGridKZ');
-  const isKZ        = country === 'kz';
-  if (filterBarKG) filterBarKG.style.display = isKZ ? 'none' : '';
-  if (gridKG)      gridKG.style.display      = isKZ ? 'none' : '';
-  if (filterBarKZ) filterBarKZ.style.display = isKZ ? '' : 'none';
-  if (gridKZ)      gridKZ.style.display      = isKZ ? '' : 'none';
+  const crosslink   = document.getElementById('countryCrosslink');
+  if (sectionHead && filterBarKG && gridKG && filterBarKZ && gridKZ && crosslink) {
+    [filterBarKG, gridKG, filterBarKZ, gridKZ, crosslink].forEach(el => { el.style.display = ''; });
+    if (country === 'kz') {
+      sectionHead.after(filterBarKZ, gridKZ, crosslink, filterBarKG, gridKG);
+    } else {
+      sectionHead.after(filterBarKG, gridKG, crosslink, filterBarKZ, gridKZ);
+    }
+  }
 
   // Cross-link
   const clFlag  = document.getElementById('crosslinkFlag');
@@ -375,7 +365,10 @@ function initHeroCountryTabs() {
     applyCountry(country);
   }
 
-  tabs.forEach(tab => tab.addEventListener('click', () => selectTab(tab.dataset.hct)));
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    selectTab(tab.dataset.hct);
+    document.querySelector('#tours')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
 
   // Cross-link button
   const crosslinkBtn = document.getElementById('crosslinkBtn');

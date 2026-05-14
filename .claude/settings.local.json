@@ -6,7 +6,8 @@
       "Bash(where python *)",
       "Bash(where python3 *)",
       "Bash(py --version)",
-      "Bash(py gen_tours.py)"
+      "Bash(py gen_tours.py)",
+      "Bash(node -e ' *)"
     ]
   }
 }

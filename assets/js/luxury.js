@@ -278,9 +278,10 @@ function applyCountry(country) {
   if (flagEl)  flagEl.textContent  = d.navFlag;
   if (labelEl) labelEl.textContent = d.navLabel;
 
-  // KZ banner
-  const kzBanner = document.getElementById('kzBanner');
-  if (kzBanner) kzBanner.style.display = country === 'kz' ? 'block' : 'none';
+  // Sync hero tabs
+  document.querySelectorAll('.hero-ctab').forEach(t =>
+    t.classList.toggle('active', t.dataset.hct === country)
+  );
 
   // Hero text
   const heroLabel = document.getElementById('heroLabelSpan');
@@ -363,72 +364,37 @@ function initFilterKZ() {
   });
 }
 
-// ── Country entry overlay ───────────────────────────────────
-function initCountryEntry() {
-  const overlay = document.getElementById('ceOverlay');
-  if (!overlay) return;
+// ── Hero country tabs ────────────────────────────────────────
+function initHeroCountryTabs() {
+  const tabs = document.querySelectorAll('.hero-ctab');
+  if (!tabs.length) return;
 
-  function choose(country) {
+  function selectTab(country) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.hct === country));
     sessionStorage.setItem('nc_country', country);
-    overlay.classList.add('leaving');
-    setTimeout(() => overlay.classList.add('gone'), 780);
     applyCountry(country);
   }
 
-  // Nav toggle — re-opens the overlay
-  const navBtn = document.getElementById('navCountryBtn');
-  if (navBtn) {
-    navBtn.addEventListener('click', () => {
-      sessionStorage.removeItem('nc_country');
-      overlay.classList.remove('leaving', 'gone', 'hov-kg', 'hov-kz');
-    });
-  }
+  tabs.forEach(tab => tab.addEventListener('click', () => selectTab(tab.dataset.hct)));
 
-  // KZ banner switch to Kyrgyzstan
-  const kzSwitch = document.getElementById('kzBannerSwitch');
-  if (kzSwitch) {
-    kzSwitch.addEventListener('click', () => {
-      sessionStorage.setItem('nc_country', 'kg');
-      applyCountry('kg');
-    });
-  }
-
-  // Cross-link button (switch country and scroll to tours)
+  // Cross-link button
   const crosslinkBtn = document.getElementById('crosslinkBtn');
   if (crosslinkBtn) {
     crosslinkBtn.addEventListener('click', () => {
       const target = crosslinkBtn.dataset.target || 'kz';
-      sessionStorage.setItem('nc_country', target);
-      applyCountry(target);
+      selectTab(target);
       document.getElementById('tours')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 
-  // If already chosen this session — skip overlay
+  // Restore last choice
   const saved = sessionStorage.getItem('nc_country');
-  if (saved) {
-    overlay.classList.add('gone');
-    applyCountry(saved);
-    return;
-  }
-
-  const panelKG = document.getElementById('cePanelKG');
-  const panelKZ = document.getElementById('cePanelKZ');
-  const skipBtn = document.getElementById('ceSkip');
-
-  panelKG.addEventListener('mouseenter', () => overlay.classList.add('hov-kg'));
-  panelKG.addEventListener('mouseleave', () => overlay.classList.remove('hov-kg'));
-  panelKZ.addEventListener('mouseenter', () => overlay.classList.add('hov-kz'));
-  panelKZ.addEventListener('mouseleave', () => overlay.classList.remove('hov-kz'));
-
-  panelKG.addEventListener('click', () => choose('kg'));
-  panelKZ.addEventListener('click', () => choose('kz'));
-  skipBtn.addEventListener('click', () => choose('kg'));
+  if (saved && saved !== 'kg') selectTab(saved);
 }
 
 // ── Init all ────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initCountryEntry();
+  initHeroCountryTabs();
   initFilterKZ();
   initNav();
   initMobileMenu();
